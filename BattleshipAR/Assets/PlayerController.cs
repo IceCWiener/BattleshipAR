@@ -6,25 +6,27 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    GameObject player;
     private float boardSizeX;
-    private float boardSizeY;
+    private float boardSizeZ;
     private float tileSize;
 
+    public GameObject player;
     public Transform tile;
 
 	void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
         boardSizeX = player.GetComponent<Transform>().transform.localScale.x;
-        boardSizeY = player.GetComponent<Transform>().transform.localScale.z;
+        boardSizeZ = player.GetComponent<Transform>().transform.localScale.z;
+        //print("BoardX: " + boardSizeX);
+        //print("BoardZ: " + boardSizeZ);
 
-        for(int i = 0; i < boardSizeX; i++)
+        for(float i = -2; i <= 2; i++)
         {
-            for(int j = 0; i < boardSizeY; j++)
+            for(float j = -2; i <= 2; j++)
             {
                 Instantiate(tile, new Vector3(i, j, tile.transform.position.z), Quaternion.identity);
             }
         }
+
     }
 	
     void Update () {
