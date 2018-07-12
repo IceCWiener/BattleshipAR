@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*Author: Konstantin Regenhardt*/
+//This script dynamically fills the field of the player with squares with a margin to the borders and each other.
+//(Change tilesize in prefab)
 
 public class PlayerController : MonoBehaviour {
 
-    //This script dynamically fills the field of the player with squares with a margin to the borders and each other.
-    //(Change tilesize in prefab)
 
     private float extentsX;
     private float extentsZ;
     private float tileSize;
+    private GameObject parent;
+
+    private bool shipClick;
 
     public GameObject player;
     public Transform tile;
@@ -31,6 +34,8 @@ public class PlayerController : MonoBehaviour {
         }
 
         //print("Tilewidth: " + tile.GetComponent<Renderer>().bounds.size);
+
+        shipClick = false;
 
     }
 	

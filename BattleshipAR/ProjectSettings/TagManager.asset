@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerController
+  - Ship1
+  - Ship2
+  - Ship3
   layers:
   - Default
   - TransparentFX
