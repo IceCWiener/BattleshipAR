@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114999479829101378}
   m_Layer: 0
   m_Name: Tile
-  m_TagString: Untagged
+  m_TagString: Tiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,5 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f16ffb3432f787d42a5e811c20078474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleFactor: 0.01
-  colorIntensity: 5.37
+  highlightColorIntensity: 0.41
+  clickColor: {r: 0.990566, g: 1, b: 0.5990566, a: 0}

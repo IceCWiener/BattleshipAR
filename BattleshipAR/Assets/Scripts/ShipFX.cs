@@ -41,7 +41,7 @@ public class ShipFX : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        current = highlight;
+        current = highlight;    //TODO Changing of material doesn´t work yet
         
     }
 

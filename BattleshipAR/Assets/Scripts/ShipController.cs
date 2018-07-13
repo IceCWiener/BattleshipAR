@@ -8,9 +8,9 @@ using UnityEngine;
 public class ShipController : MonoBehaviour {
 
     [HideInInspector]
-    public bool selectShip;  //Accessed by Playercontroller
+    public bool selectShip;  //Accessed by Playercontroller and TileFX
     [HideInInspector]
-    public int shipsLeft;   //Accessed by Gamecontroller
+    public int shipsLeft;   //Accessed and set by Gamecontroller
 
     private bool printed;
 

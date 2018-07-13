@@ -8,6 +8,8 @@ TagManager:
   - Ship1
   - Ship2
   - Ship3
+  - PlayerField
+  - Tiles
   layers:
   - Default
   - TransparentFX

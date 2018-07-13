@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 /*Author: Konstantin Regenhardt*/
 //This script controlles all game mechanics like changing phases of placing ships and taking turn attacking the enemy.
+//All variables that control rules and the like should be publicly initialized in this script.
 
 public class GameController : MonoBehaviour {
 

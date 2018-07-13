@@ -25,11 +25,14 @@ public class PlayerController : MonoBehaviour {
         //print("BoardX: " + extentsX);
         //print("BoardZ: " + extentsZ);
 
+        parent = GameObject.FindGameObjectWithTag("PlayerField");
+
         for (float i = -extentsX + 1; i < extentsX; i++)
         {
             for(float j = -extentsZ + 1; j < extentsZ; j++)
             {
-                Instantiate(tile, new Vector3(i, tile.transform.position.y, j), Quaternion.identity);
+                tile.name = "Tile " + i.ToString() + " " + j.ToString();
+                Instantiate(tile, new Vector3(parent.transform.position.x + i, tile.transform.position.y, parent.transform.position.z + j), Quaternion.identity, parent.transform);
             }
         }
 
