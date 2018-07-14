@@ -14,7 +14,11 @@ public class PlayerController : MonoBehaviour {
     private float tileSize;
     private GameObject parent;
 
-    private bool shipClick;
+    //private bool shipClick;
+    [HideInInspector]
+    public bool choice1Ship1;   //Globally displays if the player chose their first position of ship1.
+    [HideInInspector]
+    public bool chosen1Ship1;   //Intermidiate boolean to mark state of letting go of the mouse after a choice has been made.
 
     public GameObject player;
     public Transform tile;
@@ -38,8 +42,9 @@ public class PlayerController : MonoBehaviour {
 
         //print("Tilewidth: " + tile.GetComponent<Renderer>().bounds.size);
 
-        shipClick = false;
-
+        //shipClick = false;
+        choice1Ship1 = false;
+        chosen1Ship1 = false;
     }
 	
     void Update () {

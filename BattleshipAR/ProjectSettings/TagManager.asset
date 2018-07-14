@@ -10,6 +10,7 @@ TagManager:
   - Ship3
   - PlayerField
   - Tiles
+  - ShipBlock
   layers:
   - Default
   - TransparentFX
