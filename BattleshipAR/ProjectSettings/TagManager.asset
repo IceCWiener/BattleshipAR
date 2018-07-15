@@ -11,6 +11,9 @@ TagManager:
   - PlayerField
   - Tiles
   - ShipBlock
+  - PlayerRadar
+  - TilesRadar
+  - TilesField
   layers:
   - Default
   - TransparentFX

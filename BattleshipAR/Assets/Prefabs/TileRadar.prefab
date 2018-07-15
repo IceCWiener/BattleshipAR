@@ -9,33 +9,34 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1092830720775724}
+  m_RootGameObject: {fileID: 1514056572815026}
   m_IsPrefabParent: 1
---- !u!1 &1092830720775724
+--- !u!1 &1514056572815026
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4645769276648480}
-  - component: {fileID: 33361607866021322}
-  - component: {fileID: 23552090795500576}
-  - component: {fileID: 64754242146662386}
-  - component: {fileID: 114999479829101378}
+  - component: {fileID: 4634980631578510}
+  - component: {fileID: 33529108558269648}
+  - component: {fileID: 23837865635984996}
+  - component: {fileID: 64944795760856894}
+  - component: {fileID: 114438688251675090}
+  - component: {fileID: 114484833802522588}
   m_Layer: 0
-  m_Name: Tile
-  m_TagString: Tiles
+  m_Name: TileRadar
+  m_TagString: TilesRadar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4645769276648480
+--- !u!4 &4634980631578510
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1092830720775724}
+  m_GameObject: {fileID: 1514056572815026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 0.09, y: 1, z: 0.09}
@@ -43,12 +44,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23552090795500576
+--- !u!23 &23837865635984996
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1092830720775724}
+  m_GameObject: {fileID: 1514056572815026}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
@@ -78,19 +79,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33361607866021322
+--- !u!33 &33529108558269648
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1092830720775724}
+  m_GameObject: {fileID: 1514056572815026}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64754242146662386
+--- !u!64 &64944795760856894
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1092830720775724}
+  m_GameObject: {fileID: 1514056572815026}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -99,22 +100,31 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114999479829101378
+--- !u!114 &114438688251675090
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1092830720775724}
+  m_GameObject: {fileID: 1514056572815026}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f16ffb3432f787d42a5e811c20078474, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fa1f94102af33e48b86b837f3a229a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightColorIntensity: 0.41
-  clickColor: {r: 0.990566, g: 1, b: 0.5990566, a: 0}
-  hoverChoiceCol: {r: 0.7216981, g: 0.7730732, b: 1, a: 0}
-  shipBlock: {fileID: 1194032705125250, guid: d967f06bb27ac3a46aa5fc64f9dbdc3c, type: 2}
-  ship1selected: 0
-  choice1Ship1: 0
-  chosen1Ship1: 0
-  setFirstBlock: 0
+  hit: {r: 1, g: 0.020209502, b: 0, a: 0}
+  miss: {r: 0.5896226, g: 0.64224833, b: 1, a: 0}
+  attackHoverHighlight: {r: 1, g: 0.56550515, b: 0.4764151, a: 0}
+  attackHighlight: {r: 1, g: 0.99997807, b: 0, a: 0}
+--- !u!114 &114484833802522588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1514056572815026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d04d3eead70dfc047aabfed50fbd5b13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasShipBlock: 0
+  shipBlockDestroyed: 0

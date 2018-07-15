@@ -11,14 +11,14 @@ public class ShipFX : MonoBehaviour {
     public Material highlight;
     public float scaleFactor;
 
-    private Material current;
+    //private Material current;
     private float scaleX;
     private float scaleY;
     private float scaleZ;
 
 	// Use this for initialization
 	void Start () {
-        current = GetComponent<Renderer>().material;
+        //current = GetComponent<Renderer>().material;
         scaleX = GetComponent<Transform>().localScale.x;
         scaleY = GetComponent<Transform>().localScale.y;
         scaleZ = GetComponent<Transform>().localScale.z;
@@ -41,13 +41,13 @@ public class ShipFX : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        current = highlight;    //TODO Changing of material doesn´t work yet
+        //current = highlight;    //TODO Changing of material doesn´t work yet
         
     }
 
     private void OnMouseUp()
     {
-        current = material;
+        //current = material;
         
     }
 }

@@ -12,7 +12,10 @@ public class PlayerController : MonoBehaviour {
     private float extentsX;
     private float extentsZ;
     private float tileSize;
-    private GameObject parent;
+    private Transform parentField;
+    private Transform parentRadar;
+    public GameObject playerField;
+    public GameObject playerRadar;
 
     //private bool shipClick;
     [HideInInspector]
@@ -20,23 +23,27 @@ public class PlayerController : MonoBehaviour {
     [HideInInspector]
     public bool chosen1Ship1;   //Intermidiate boolean to mark state of letting go of the mouse after a choice has been made.
 
-    public GameObject player;
-    public Transform tile;
+    public Transform tileField;
+    public Transform tileRadar;
 
 	void Start () {
-        extentsX = player.GetComponent<Renderer>().bounds.extents.x;    //extents = half the boardsize
-        extentsZ = player.GetComponent<Renderer>().bounds.extents.z;
+        parentField = GameObject.FindGameObjectWithTag("PlayerField").GetComponent<Transform>();    //If changed to playerField.Get... -> Error: Can't destroy Transform component of 'TileField -2 -3(Clone)'. If you want to destroy the game object, please call 'Destroy' on the game object instead. Destroying the transform component is not allowed.
+        parentRadar = GameObject.FindGameObjectWithTag("PlayerRadar").GetComponent<Transform>();    //Same error
+
+        extentsX = playerField.GetComponent<Renderer>().bounds.extents.x;    //extents = half the boardsize
+        extentsZ = playerField.GetComponent<Renderer>().bounds.extents.z;
         //print("BoardX: " + extentsX);
         //print("BoardZ: " + extentsZ);
-
-        parent = GameObject.FindGameObjectWithTag("PlayerField");
-
+        
         for (float i = -extentsX + 1; i < extentsX; i++)
         {
             for(float j = -extentsZ + 1; j < extentsZ; j++)
             {
-                tile.name = "Tile " + i.ToString() + " " + j.ToString();
-                Instantiate(tile, new Vector3(parent.transform.position.x + i, tile.transform.position.y, parent.transform.position.z + j), Quaternion.identity, parent.transform);
+                tileField.name = "TileField " + i.ToString() + " " + j.ToString();
+                Instantiate(tileField, new Vector3(playerField.transform.position.x + i, playerField.transform.position.y + tileField.transform.position.y, playerField.transform.position.z + j), Quaternion.identity, parentField);
+
+                tileRadar.name = "TileRadar " + i.ToString() + " " + j.ToString();
+                Instantiate(tileRadar, new Vector3(playerRadar.transform.position.x + i, playerRadar.transform.position.y + j, playerRadar.transform.position.z + tileRadar.transform.position.y), playerRadar.transform.rotation, parentRadar);
             }
         }
 

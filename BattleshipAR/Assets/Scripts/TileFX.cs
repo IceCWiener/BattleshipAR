@@ -23,10 +23,16 @@ public class TileFX : MonoBehaviour
 
     private Material current;
     private Color original;
+
     private GameObject ship1;
     private ShipController shipController1;
+
     private GameObject playerController;
     private PlayerController playerControllerScript;
+
+    private GameObject gameController;
+    private GameController gameControllerScript;
+    private bool phase1;
     
     //Hidden public variables are to be accessed by the Shipcontroller, so it doesn´t have to go through the logicsystem twice.
     [HideInInspector]
@@ -68,10 +74,14 @@ public class TileFX : MonoBehaviour
 
         ship1 = GameObject.FindGameObjectWithTag("Ship1");
         shipController1 = ship1.GetComponent<ShipController>();
+
         playerController = GameObject.FindGameObjectWithTag("PlayerController");
         playerControllerScript = playerController.GetComponent<PlayerController>();
 
-        player = playerControllerScript.player;
+        gameController = GameObject.FindGameObjectWithTag("GameController");
+        gameControllerScript = gameController.GetComponent<GameController>();
+
+        player = playerControllerScript.playerField;
         extentsX = player.GetComponent<Renderer>().bounds.extents.x;    //extents = half the boardsize
         extentsZ = player.GetComponent<Renderer>().bounds.extents.z;
     }
@@ -82,41 +92,45 @@ public class TileFX : MonoBehaviour
         ship1selected = shipController1.selectShip;
         choice1Ship1 = playerControllerScript.choice1Ship1;
         chosen1Ship1 = playerControllerScript.chosen1Ship1;
+        phase1 = gameControllerScript.phase1;
     }
 
     private void OnMouseEnter()
     {
         //trans.localScale = new Vector3(scaleX + scaleFactor, scaleY + scaleFactor, scaleZ + scaleFactor); //Enlargens the tile
-        if (!choice1Ship1)
+        if (phase1)
         {
-            current.color = original + new Color(highlightColorIntensity, highlightColorIntensity, highlightColorIntensity);
-        }
-
-        if (ship1selected && !choice1Ship1)
-        {
-            for (float i = -1; i < 2; i++)
+            if (!choice1Ship1)
             {
-                for (float j = -1; j < 2; j++)
-                {
-                    float kernelX = i + posX;
-                    float kernelZ = j + posZ;
-                    GameObject tile = GameObject.Find("Tile " + kernelX.ToString() + " " + kernelZ.ToString() + "(Clone)");
+                current.color = original + new Color(highlightColorIntensity, highlightColorIntensity, highlightColorIntensity);
+            }
 
-                    if (tile == null)
+            if (ship1selected && !choice1Ship1)
+            {
+                for (float i = -1; i < 2; i++)
+                {
+                    for (float j = -1; j < 2; j++)
                     {
-                        continue;
-                    }
-                    if (i == 0 ^ j == 0)
-                    {
-                        tile.GetComponent<Renderer>().material.color = original + new Color(highlightColorIntensity, highlightColorIntensity, highlightColorIntensity);
+                        float kernelX = i + posX;
+                        float kernelZ = j + posZ;
+                        GameObject tile = GameObject.Find("TileField " + kernelX.ToString() + " " + kernelZ.ToString() + "(Clone)");
+
+                        if (tile == null)
+                        {
+                            continue;
+                        }
+                        if (i == 0 ^ j == 0)
+                        {
+                            tile.GetComponent<Renderer>().material.color = original + new Color(highlightColorIntensity, highlightColorIntensity, highlightColorIntensity);
+                        }
                     }
                 }
             }
-        }
 
-        if(ship1selected && choice1Ship1 && current.color == original + new Color(highlightColorIntensity, highlightColorIntensity, highlightColorIntensity))
-        {
-            current.color = hoverChoiceCol;
+            if (ship1selected && choice1Ship1 && current.color == original + new Color(highlightColorIntensity, highlightColorIntensity, highlightColorIntensity))
+            {
+                current.color = hoverChoiceCol;
+            }
         }
 
     }
@@ -124,107 +138,116 @@ public class TileFX : MonoBehaviour
     private void OnMouseExit()
     {
         //GetComponent<Transform>().localScale = new Vector3(scaleX, scaleY, scaleZ);   //Sets tile back to original size
-        if (!choice1Ship1)
+        if (phase1)
         {
-            current.color = original;
-        }
-
-        if (ship1selected && !choice1Ship1)
-        {
-            for (float i = -1; i < 2; i++)
+            if (!choice1Ship1)
             {
-                for (float j = -1; j < 2; j++)
-                {
-                    float kernelX = i + posX;
-                    float kernelZ = j + posZ;
-                    GameObject tile = GameObject.Find("Tile " + kernelX.ToString() + " " + kernelZ.ToString() + "(Clone)");
+                current.color = original;
+            }
 
-                    if (tile == null)
+            if (ship1selected && !choice1Ship1)
+            {
+                for (float i = -1; i < 2; i++)
+                {
+                    for (float j = -1; j < 2; j++)
                     {
-                        continue;
-                    }
-                    if (i == 0 ^ j == 0)
-                    {
-                        tile.GetComponent<Renderer>().material.color = original;
+                        float kernelX = i + posX;
+                        float kernelZ = j + posZ;
+                        GameObject tile = GameObject.Find("TileField " + kernelX.ToString() + " " + kernelZ.ToString() + "(Clone)");
+
+                        if (tile == null)
+                        {
+                            continue;
+                        }
+                        if (i == 0 ^ j == 0)
+                        {
+                            tile.GetComponent<Renderer>().material.color = original;
+                        }
                     }
                 }
             }
-        }
 
-        if (ship1selected && choice1Ship1 && current.color == hoverChoiceCol)
-        {
-            current.color = original + new Color(highlightColorIntensity, highlightColorIntensity, highlightColorIntensity);
+            if (ship1selected && choice1Ship1 && current.color == hoverChoiceCol)
+            {
+                current.color = original + new Color(highlightColorIntensity, highlightColorIntensity, highlightColorIntensity);
+            }
         }
     }
 
     private void OnMouseDown()
     {
         //current = highlight;
-        if (!choice1Ship1)
+        if (phase1)
         {
-            current.color = clickColor;
-        }
+            if (!choice1Ship1)
+            {
+                current.color = clickColor;
+            }
 
-        if(ship1selected && !choice1Ship1)
-        {
-            playerControllerScript.choice1Ship1 = true;
+            if (ship1selected && !choice1Ship1)
+            {
+                playerControllerScript.choice1Ship1 = true;
+            }
         }
     }
 
     private void OnMouseUp()
     {
         //current = material;
-
-        if (!choice1Ship1)
+        if (phase1)
         {
-            current.color = original + new Color(highlightColorIntensity, highlightColorIntensity, highlightColorIntensity);
-        } 
-
-        if (choice1Ship1 && !chosen1Ship1)       //Shows selectionfield for second choice of ship1 and sets first ship block.
-        {
-            current.color = original;
-            for (float i = -1; i < 2; i++)
+            if (!choice1Ship1)
             {
-                for (float j = -1; j < 2; j++)
-                {
-                    float kernelX = i + posX;
-                    float kernelZ = j + posZ;
-                    GameObject tile = GameObject.Find("Tile " + kernelX.ToString() + " " + kernelZ.ToString() + "(Clone)");
+                current.color = original + new Color(highlightColorIntensity, highlightColorIntensity, highlightColorIntensity);
+            }
 
-                    if (tile == null)
+            if (choice1Ship1 && !chosen1Ship1)       //Shows selectionfield for second choice of ship1 and sets first ship block.
+            {
+                current.color = original;
+                for (float i = -1; i < 2; i++)
+                {
+                    for (float j = -1; j < 2; j++)
                     {
-                        continue;
+                        float kernelX = i + posX;
+                        float kernelZ = j + posZ;
+                        GameObject tile = GameObject.Find("TileField " + kernelX.ToString() + " " + kernelZ.ToString() + "(Clone)");
+
+                        if (tile == null)
+                        {
+                            continue;
+                        }
+                        if (i == 0 ^ j == 0)
+                        {
+                            tile.GetComponent<Renderer>().material.color = original + new Color(highlightColorIntensity, highlightColorIntensity, highlightColorIntensity);
+                        }
+                        if (i == 0 && j == 0)
+                        {
+                            Instantiate(shipBlock, new Vector3(tile.transform.position.x, shipBlock.transform.position.y, tile.transform.position.z), Quaternion.identity);
+                        }
                     }
-                    if (i == 0 ^ j == 0)
+                }
+                playerControllerScript.chosen1Ship1 = true;
+            }
+
+            if (current.color == hoverChoiceCol) //Ship 1 has only two segments and when they have been placed the phase resets in the GameController until the inventory is empty.
+            {
+                playerControllerScript.chosen1Ship1 = false;
+                playerControllerScript.choice1Ship1 = false;
+                shipController1.selectShip = false;
+                GameObject tile = GameObject.Find("TileField " + posX.ToString() + " " + posZ.ToString() + "(Clone)");
+                Instantiate(shipBlock, new Vector3(tile.transform.position.x, shipBlock.transform.position.y, tile.transform.position.z), Quaternion.identity);
+                shipController1.shipsLeft--;
+
+                for (float i = -extentsX + 1; i < extentsX; i++)
+                {
+                    for (float j = -extentsZ + 1; j < extentsZ; j++)
                     {
-                        tile.GetComponent<Renderer>().material.color = original + new Color(highlightColorIntensity, highlightColorIntensity, highlightColorIntensity);
-                    }
-                    if(i == 0 && j == 0)
-                    {
-                        Instantiate(shipBlock, new Vector3(tile.transform.position.x, shipBlock.transform.position.y, tile.transform.position.z), Quaternion.identity);
+                        tile = GameObject.Find("TileField " + i + " " + j + "(Clone)");
+                        tile.GetComponent<Renderer>().material.color = original;
                     }
                 }
             }
-            playerControllerScript.chosen1Ship1 = true;
         }
-
-        if(current.color == hoverChoiceCol) //Ship 1 has only two segments and when they have been chosen the phase resets in the GameController.
-        {
-            playerControllerScript.chosen1Ship1 = false;
-            playerControllerScript.choice1Ship1 = false;
-            shipController1.selectShip = false;
-            GameObject tile = GameObject.Find("Tile " + posX.ToString() + " " + posZ.ToString() + "(Clone)");
-            Instantiate(shipBlock, new Vector3(tile.transform.position.x, shipBlock.transform.position.y, tile.transform.position.z), Quaternion.identity);
-            shipController1.shipsLeft--;
-
-            for (float i = -extentsX + 1; i < extentsX; i++)
-            {
-                for (float j = -extentsZ + 1; j < extentsZ; j++)
-                {
-                    tile = GameObject.Find("Tile " + i + " " + j + "(Clone)");
-                    tile.GetComponent<Renderer>().material.color = original;
-                }
-            }
-        }
+        
     }
 }
