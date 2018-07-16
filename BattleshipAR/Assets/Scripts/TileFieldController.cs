@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class TileFieldController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [HideInInspector]
+    public bool hasShipBlock;
+    [HideInInspector]
+    public bool shipBlockDestroyed;
+
+    // Use this for initialization
+    void Start()
+    {
+        hasShipBlock = false;
+        shipBlockDestroyed = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }

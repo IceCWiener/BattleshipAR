@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour {
         extentsZ = playerField.GetComponent<Renderer>().bounds.extents.z;
         //print("BoardX: " + extentsX);
         //print("BoardZ: " + extentsZ);
-        
         for (float i = -extentsX + 1; i < extentsX; i++)
         {
             for(float j = -extentsZ + 1; j < extentsZ; j++)

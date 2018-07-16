@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114438688251675090}
   - component: {fileID: 114484833802522588}
   m_Layer: 0
-  m_Name: TileRadar
+  m_Name: TileRadar 4 4
   m_TagString: TilesRadar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -21,6 +21,17 @@ public class TileFX : MonoBehaviour
     public Color hoverChoiceCol;    //Color that appears when you hover the mouse over the newly displayed choices.
     public GameObject shipBlock;
 
+    //Hidden public variables are to be accessed by the Shipcontroller, so it doesn´t have to go through the logicsystem twice.
+    [HideInInspector]
+    public bool ship1selected;
+    [HideInInspector]
+    public bool choice1Ship1;    //Equals true after the player made the first choice of where to place their ship.
+    //TilesFX is unique for every tile, so choices made have to be set and got from the global PlayerController.
+    [HideInInspector]
+    public bool chosen1Ship1;
+    [HideInInspector]
+    public bool setFirstBlock;
+
     private Material current;
     private Color original;
 
@@ -33,17 +44,6 @@ public class TileFX : MonoBehaviour
     private GameObject gameController;
     private GameController gameControllerScript;
     private bool phase1;
-    
-    //Hidden public variables are to be accessed by the Shipcontroller, so it doesn´t have to go through the logicsystem twice.
-    [HideInInspector]
-    public bool ship1selected;
-    [HideInInspector]
-    public bool choice1Ship1;    //Equals true after the player made the first choice of where to place their ship.
-    //TilesFX is unique for every tile, so choices made have to be set and got from the global PlayerController.
-    [HideInInspector]
-    public bool chosen1Ship1;
-    [HideInInspector]
-    public bool setFirstBlock;
 
     private GameObject player;
     private float extentsX;
@@ -223,6 +223,7 @@ public class TileFX : MonoBehaviour
                         if (i == 0 && j == 0)
                         {
                             Instantiate(shipBlock, new Vector3(tile.transform.position.x, shipBlock.transform.position.y, tile.transform.position.z), Quaternion.identity);
+                            tile.GetComponent<TileFieldController>().hasShipBlock = true;
                         }
                     }
                 }

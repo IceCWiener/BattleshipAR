@@ -22,15 +22,19 @@ public class GameController : MonoBehaviour {
 
     private GameObject ship1;
     private ShipController shipController;
-    
+
+    private AIController aiController;    
 	// Use this for initialization
 	void Start () {
         phase1 = true;
         phase2 = false;
+
         ship1 = GameObject.FindGameObjectWithTag("Ship1");
         shipController = ship1.GetComponent<ShipController>();
         shipController.shipsLeft = numOfShip1InInventory;
 
+        aiController = GameObject.FindGameObjectWithTag("AIController").GetComponent<AIController>();
+        aiController.ship1Left = 2;
 	}
 	
 	// Update is called once per frame

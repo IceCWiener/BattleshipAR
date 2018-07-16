@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114036204929528612}
   m_Layer: 0
   m_Name: AIController
-  m_TagString: Untagged
+  m_TagString: AIController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,3 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 485974854caf3c0479917d625cc88bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ship1Left: 0
+  blockPlaceProbability: 0.9890000224113464

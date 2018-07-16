@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TileRadarController : MonoBehaviour {
-
-    [HideInInspector]
+    
     public bool hasShipBlock;
     [HideInInspector]
     public bool shipBlockDestroyed;
@@ -17,6 +16,9 @@ public class TileRadarController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (hasShipBlock)
+        {
+            GetComponent<Renderer>().material.color = Color.cyan;
+        }
 	}
 }
