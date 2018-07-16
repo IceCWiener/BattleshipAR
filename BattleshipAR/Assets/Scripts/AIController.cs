@@ -63,7 +63,9 @@ public class AIController : MonoBehaviour {
                         bool placeBlock2 = false;
                         GameObject tile = GameObject.Find("TileRadar " + i.ToString() + " " + j.ToString() + "(Clone)");
                         tile.GetComponent<TileRadarController>().hasShipBlock = true;
-                        for (float x = -1; !placeBlock2;)
+                        print("Block placed");
+
+                        /*for (float x = -1; !placeBlock2;) //A more random placement of the second block does not seem to work yet.
                         {
                             x = Mathf.Round(x + Random.Range(0, 2));
                             for(float y = -1; !placeBlock2;)
@@ -77,11 +79,29 @@ public class AIController : MonoBehaviour {
                                     tile.GetComponent<TileRadarController>().hasShipBlock = true;
                                     print("Second AIshipBlock" + tile.name);
                                 }
+                                placeBlock2 = true;
                                 break;
                             }
+                        }*/
+                        for(float x = -1; x < 2; x++)
+                        {
+                            for(float y = -1; y < 2; y++)
+                            {
+                                float h = x + i;
+                                float k = y + j;
+                                tile = GameObject.Find("TileRadar " + h.ToString() + " " + k.ToString() + "(Clone)");
+
+                                if(tile == null || h == 0 ^ k == 0)
+                                {
+                                    continue;
+                                }
+                                tile.GetComponent<TileRadarController>().hasShipBlock = true;
+                                placeBlock2 = true;
+                                break;
+                            }
+                            if (placeBlock2) { break; }
                         }
 
-                        print("Block placed");
                         ship1Left--;
                         shipsLeftTotal = ship1Left;
                         print("shipsLeftTotal: " + shipsLeftTotal);
