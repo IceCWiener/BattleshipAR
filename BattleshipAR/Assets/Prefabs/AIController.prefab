@@ -52,4 +52,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship1Left: 0
-  blockPlaceProbability: 0.9890000224113464
+  blockPlaceProbability: 0.0560000017285347
+  attackProbability: 0.04699999839067459

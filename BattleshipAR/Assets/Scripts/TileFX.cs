@@ -45,6 +45,14 @@ public class TileFX : MonoBehaviour
     private GameController gameControllerScript;
     private bool phase1;
 
+    private TileFieldController tileFieldControllerScript;
+    private bool hit;
+    private bool miss;
+    private bool hitMarkPlaced;
+    private bool missMarkPlaced;
+    public GameObject hitMarker;
+    public GameObject missMarker;
+
     private GameObject player;
     private float extentsX;
     private float extentsZ;
@@ -81,6 +89,11 @@ public class TileFX : MonoBehaviour
         gameController = GameObject.FindGameObjectWithTag("GameController");
         gameControllerScript = gameController.GetComponent<GameController>();
 
+        tileFieldControllerScript = GetComponent<TileFieldController>();
+        hit = tileFieldControllerScript.shipBlockDestroyed;
+        miss = tileFieldControllerScript.miss;
+        
+
         player = playerControllerScript.playerField;
         extentsX = player.GetComponent<Renderer>().bounds.extents.x;    //extents = half the boardsize
         extentsZ = player.GetComponent<Renderer>().bounds.extents.z;
@@ -93,6 +106,20 @@ public class TileFX : MonoBehaviour
         choice1Ship1 = playerControllerScript.choice1Ship1;
         chosen1Ship1 = playerControllerScript.chosen1Ship1;
         phase1 = gameControllerScript.phase1;
+        hit = tileFieldControllerScript.shipBlockDestroyed;
+        miss = tileFieldControllerScript.miss;
+
+        if (hit && !hitMarkPlaced)
+        {
+            Instantiate(hitMarker, trans.position, hitMarker.transform.rotation);
+            hitMarkPlaced = true;
+        }
+
+        if (miss && !missMarkPlaced)
+        {
+            Instantiate(missMarker, trans.position, missMarker.transform.rotation);
+            missMarkPlaced = true;
+        }
     }
 
     private void OnMouseEnter()
@@ -224,6 +251,7 @@ public class TileFX : MonoBehaviour
                         {
                             Instantiate(shipBlock, new Vector3(tile.transform.position.x, shipBlock.transform.position.y, tile.transform.position.z), Quaternion.identity);
                             tile.GetComponent<TileFieldController>().hasShipBlock = true;
+                            gameControllerScript.playerActiveShipBlocks++;
                         }
                     }
                 }
@@ -237,6 +265,8 @@ public class TileFX : MonoBehaviour
                 shipController1.selectShip = false;
                 GameObject tile = GameObject.Find("TileField " + posX.ToString() + " " + posZ.ToString() + "(Clone)");
                 Instantiate(shipBlock, new Vector3(tile.transform.position.x, shipBlock.transform.position.y, tile.transform.position.z), Quaternion.identity);
+                tile.GetComponent<TileFieldController>().hasShipBlock = true;
+                gameControllerScript.playerActiveShipBlocks++;
                 shipController1.shipsLeft--;
 
                 for (float i = -extentsX + 1; i < extentsX; i++)

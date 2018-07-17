@@ -111,8 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa1f94102af33e48b86b837f3a229a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hit: {r: 1, g: 0.020209502, b: 0, a: 0}
-  miss: {r: 0.5896226, g: 0.64224833, b: 1, a: 0}
+  hit: 0
+  miss: 0
+  hitColor: {r: 1, g: 0, b: 0.05751419, a: 0}
+  missColor: {r: 0.5518868, g: 0.63265973, b: 1, a: 0}
   attackHoverHighlight: {r: 1, g: 0.56550515, b: 0.4764151, a: 0}
   attackHighlight: {r: 1, g: 0.99997807, b: 0, a: 0}
 --- !u!114 &114484833802522588
@@ -128,3 +130,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasShipBlock: 0
   shipBlockDestroyed: 0
+  hit: 0
+  miss: 0

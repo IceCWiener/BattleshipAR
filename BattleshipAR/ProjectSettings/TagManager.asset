@@ -15,6 +15,10 @@ TagManager:
   - TilesRadar
   - TilesField
   - AIController
+  - RedCross
+  - YouWin
+  - ReplayExit
+  - YouLose
   layers:
   - Default
   - TransparentFX

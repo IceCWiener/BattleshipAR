@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasShipBlock: 0
   shipBlockDestroyed: 0
+  miss: 0
 --- !u!114 &114999479829101378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -132,3 +133,5 @@ MonoBehaviour:
   choice1Ship1: 0
   chosen1Ship1: 0
   setFirstBlock: 0
+  hitMarker: {fileID: 1254483714064286, guid: bc078ea83c4345745a5c5cda3d385c3a, type: 2}
+  missMarker: {fileID: 1424156998259456, guid: e0ed448f8ca3e374c9cf71fc778143d5, type: 2}

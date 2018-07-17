@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Author: Konstantin Regenhardt*/
 public class AIController : MonoBehaviour {
 
     private GameObject playerField;
@@ -13,13 +14,15 @@ public class AIController : MonoBehaviour {
 
     private GameObject gameController;
     private GameController gameControllerScript;
-
-    private int shipsLeftTotal;
+    [HideInInspector]
+    public int shipsLeftTotal;
 
     [HideInInspector]
     public int ship1Left;  //To be set by GameController
     [Range(0, 1)]
     public double blockPlaceProbability;
+    [Range(0, 1)]
+    public double attackProbability;
     
     // Use this for initialization
     void Start () {
@@ -38,7 +41,7 @@ public class AIController : MonoBehaviour {
         phase2 = gameControllerScript.phase2;
 
         shipsLeftTotal = ship1Left; //Sum of all ships left in the AI inventory.
-        if (!shipsPlaced)  //AI places its ships after the player emptied their inventory.
+        if (!shipsPlaced && phase2)  //AI places its ships after the player emptied their inventory and sets playerTurn in GameController to true.
         {
             //print("ExtentsXZ: " + extentsX + " " + extentsZ);
                                  
@@ -49,9 +52,10 @@ public class AIController : MonoBehaviour {
                     print("For-Loop: " + i + " " + j);
 
                     bool placeBlock1;
-                    if (Random.value > blockPlaceProbability)
+                    if (Random.value < blockPlaceProbability)
                     {
                        placeBlock1 = true;
+                       gameControllerScript.aiActiveShipBlocks++;
                     }
                     else
                     {
@@ -83,6 +87,7 @@ public class AIController : MonoBehaviour {
                                 break;
                             }
                         }*/
+
                         for(float x = -1; x < 2; x++)
                         {
                             for(float y = -1; y < 2; y++)
@@ -95,9 +100,12 @@ public class AIController : MonoBehaviour {
                                 {
                                     continue;
                                 }
+                                
                                 tile.GetComponent<TileRadarController>().hasShipBlock = true;
                                 placeBlock2 = true;
+                                gameControllerScript.aiActiveShipBlocks++;
                                 break;
+                                
                             }
                             if (placeBlock2) { break; }
                         }
@@ -113,9 +121,50 @@ public class AIController : MonoBehaviour {
                         }
                     }
                 }
-                if (shipsPlaced) { break; }
+                if (shipsPlaced) {
+                    gameControllerScript.playerTurn = true;
+                    break;
+                }
             }
             
+        }
+
+        while (gameControllerScript.aiTurn) //AI takes turns attacking the player.
+        {
+            for (float i = -extentsX + 1; i < extentsX; i++)
+            {
+                for (float j = -extentsZ + 1; j < extentsZ; j++)
+                {
+                    GameObject tile = GameObject.Find("TileField " + i.ToString() + " " + j.ToString() + "(Clone)");
+                    bool attack;
+                    if (Random.value < attackProbability && !tile.GetComponent<TileFieldController>().miss && !tile.GetComponent<TileFieldController>().shipBlockDestroyed) //Only attackable when there has been no attack on the tile before.
+                    {
+                        attack = true;
+                        gameControllerScript.playerTurn = true;
+                    }
+                    else
+                    {
+                        attack = false;
+                    }
+                    if (attack)
+                    {
+                        if (tile.GetComponent<TileFieldController>().hasShipBlock)
+                        {
+                            tile.GetComponent<TileFieldController>().shipBlockDestroyed = true;
+                            gameControllerScript.playerActiveShipBlocks--;
+                        }
+                        else
+                        {
+                            tile.GetComponent<TileFieldController>().miss = true;
+                        }
+                        gameControllerScript.aiTurn = false;
+                        break;
+                    }
+                    if (!gameControllerScript.aiTurn) { break; }
+                }
+                if (!gameControllerScript.aiTurn) { break; }
+            }
+            if (!gameControllerScript.aiTurn) { break; }
         }
 	}
 }
